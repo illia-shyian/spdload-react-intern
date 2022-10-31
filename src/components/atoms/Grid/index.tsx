@@ -9,14 +9,15 @@ interface IGridProps {
     padding?: string;
     xs?: number | string;
     columns?: string;
-    spacing?: number;
-    rowSpacing?: number;
-    columnSpacing?: number;
+    spacing?: string;
+    rowSpacing?: string;
+    columnSpacing?: string;
     direction?: string;
     alignItems?: string;
     justifyItems?: string;
     alignSelf?: string;
     justifySelf?: string;
+    justifyContent?: string;
 }
 
 const StyledGrid = styled.div<IGridProps>`
@@ -25,12 +26,14 @@ const StyledGrid = styled.div<IGridProps>`
         if (props.container) {
             return `
                 display:grid;
-                height:${props.height};
-                grid-row-gap:${props.rowSpacing || props.spacing || 0}px;
-                grid-column-gap:${props.columnSpacing || props.spacing || 0}px;
+                height:${props.height || ""};
+                grid-row-gap:${props.rowSpacing || props.spacing || 0};
+                grid-column-gap:${props.columnSpacing || props.spacing || 0};
                 grid-auto-flow:${props.direction || "row"};
-                align-items:${props.alignItems};
-                justify-items:${props.justifyItems};
+                align-items:${props.alignItems || ""};
+                justify-content:${props.justifyContent || ""};
+                justify-items:${props.justifyItems || ""};
+                width:100%;
                 ${
                     props.columns
                         ? `

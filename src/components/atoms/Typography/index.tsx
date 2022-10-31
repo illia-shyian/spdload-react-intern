@@ -15,6 +15,10 @@ interface ITypographyProps {
     fontStyle?: string;
     borderBottom?: string;
     textShadow?: string;
+    transform?: string;
+    padding?: string;
+    cursor?: string;
+    textStroke?: string;
 }
 
 const StyledTypography = styled.div<ITypographyProps>`
@@ -23,13 +27,16 @@ const StyledTypography = styled.div<ITypographyProps>`
     font-size: ${(props) => props?.fontSize};
     font-family: ${(props) => props?.fontFamily};
     font-style: ${(props) => props?.fontStyle};
-    text-shadow:${(props) => props.textShadow}
+    text-shadow: ${(props) => props.textShadow || ""};
     font-weight: ${(props) => props?.fontWeight};
     line-height: ${(props) => props?.lineHeight};
+    transform: ${(props) => props?.transform || ""};
     width: ${(props) => (props?.fullWidth ? "100%" : "")};
     color: ${(props) => props?.color || "inherit"};
-    padding: 1px;
+    padding: ${(props) => props?.padding || "1px"};
     border-bottom: ${(props) => props?.borderBottom || "none"};
+    cursor: ${(props) => props?.cursor || ""};
+    -webkit-text-stroke: ${(props) => props?.textStroke || ""};
     box-sizing: content-box;
 
     ${(props) => {

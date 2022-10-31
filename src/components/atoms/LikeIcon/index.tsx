@@ -1,9 +1,10 @@
-import { FC, ReactElement, ReactNode } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { ReactComponent as LikeIconImage } from "../../../images/like-icon.svg";
 
 interface ILikeIconProps {
     display?: string;
+    active?: boolean;
 }
 
 const StyledLikeIcon = styled.div<ILikeIconProps>`
@@ -15,7 +16,11 @@ const StyledLikeIcon = styled.div<ILikeIconProps>`
 export const LikeIcon: FC<ILikeIconProps> = (props) => {
     return (
         <StyledLikeIcon {...props}>
-            <LikeIconImage width={"100%"} height={"100%"} />
+            <LikeIconImage
+                width={"100%"}
+                height={"100%"}
+                fill={props.active ? "rgb(254, 121, 104)" : "none"}
+            />
         </StyledLikeIcon>
     );
 };

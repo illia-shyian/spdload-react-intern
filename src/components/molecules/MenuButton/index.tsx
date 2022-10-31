@@ -6,6 +6,7 @@ import { Typography } from "../../atoms/Typography";
 
 interface IMenuButtonProps {
     children?: ReactElement | ReactNode;
+    active?: boolean;
     display?: string;
     fontSize?: string;
     fullWidth?: boolean;
@@ -39,6 +40,7 @@ export const MenuButton: FC<IMenuButtonProps> = ({ children, ...props }) => {
                     fontWeight="500"
                     fontFamily="Lato"
                     fontStyle="normal"
+                    padding="0px 0px 7px 0px"
                     fullWidth
                 >
                     {children}
@@ -46,7 +48,7 @@ export const MenuButton: FC<IMenuButtonProps> = ({ children, ...props }) => {
                 <Divider
                     height="1px"
                     width="100%"
-                    color={`${hover ? "#FFF" : "rgb(0,0,0,0)"}`}
+                    color={`${hover || props.active ? "#FFF" : "rgb(0,0,0,0)"}`}
                 />
             </Flex>
         </StyledMenuButton>

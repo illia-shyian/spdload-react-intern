@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface IIconButtonProps {
     display?: string;
     children: ReactElement | ReactNode;
-    onClick?: () => any;
+    onClick?: () => void;
 }
 
 const StyledIconButton = styled.div<IIconButtonProps>`
@@ -15,8 +15,25 @@ const StyledIconButton = styled.div<IIconButtonProps>`
     justify-content: center;
     background: #ececec;
     cursor: pointer;
+    user-select: none;
+
+    transition: box-shadow 0.1s;
+
+    &:hover {
+        box-shadow: 0 0 3px rgba(33, 33, 33, 0.2);
+    }
+
+    &:active {
+        transform: scale(0.98);
+        background: #efefef;
+        box-shadow: none;
+    }
 `;
 
 export const IconButton: FC<IIconButtonProps> = ({ children, ...props }) => {
-    return <StyledIconButton {...props}>{children}</StyledIconButton>;
+    return (
+        <StyledIconButton {...props} className="IconButton">
+            {children}
+        </StyledIconButton>
+    );
 };

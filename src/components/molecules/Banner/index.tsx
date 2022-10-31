@@ -1,29 +1,48 @@
-import { FC } from "react";
+import { FC, ReactElement, ReactNode } from "react";
 import styled from "styled-components";
+import { Flex } from "../../atoms/Flex";
 import { FullScreenImage } from "../../atoms/FullScreenImage";
-
-import { Typography } from "../../atoms/Typography";
+import { FullWidthImage } from "../../atoms/FullWidthImage";
 
 interface IBannerProps {
     image: string;
+    height?: string;
+    children?: ReactElement | ReactNode;
+    fullScreen?: boolean;
 }
 
-const StyledBanner = styled.div<IBannerProps>``;
+const StyledBanner = styled.div<IBannerProps>`
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    height: ${(props) => props.height || ""};
+`;
 
 export const Banner: FC<IBannerProps> = (props) => {
     return (
         <StyledBanner {...props}>
-            <FullScreenImage image={props.image} />
-
-            <Typography
-                textAlign="center"
-                fontSize="48px"
-                fontWeight="800px"
-                textShadow="0px 4.00107px 4.00107px rgba(0, 0, 0, 0.25);"
+            {props.fullScreen ? (
+                <FullScreenImage
+                    image={props.image}
+                    position="absolute"
+                    zIndex="-1"
+                />
+            ) : (
+                <FullWidthImage
+                    height={props.height || "50%"}
+                    image={props.image}
+                    position="absolute"
+                    zIndex="-1"
+                />
+            )}
+            <Flex
+                justifyContent="center"
+                alignItems="center"
+                flexDirection="column"
+                width="100%"
+                height={props.fullScreen ? "100vh" : props.height || ""}
             >
-                THE SPACE IS WAITING FOR
-            </Typography>
-            <Typography>YOU</Typography>
+                {props.children}
+            </Flex>
         </StyledBanner>
     );
 };

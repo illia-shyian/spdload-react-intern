@@ -1,20 +1,19 @@
 import { ReactElement } from "react";
-import BannerImage from "../../../images/banner-image.png";
-import { Banner } from "../../molecules/Banner";
+import styled from "styled-components";
 import { Header } from "../../organisms/Header";
+import { MainPageBanner } from "../../organisms/MainPageBanner";
+import { MainPageSlider } from "../../organisms/MainPageSlider";
 
-interface History {
-    title: string;
-    flight: any;
-    id: string | number;
-    typename: string;
-}
+const StyledMainPage = styled.div`
+    height: 200vh;
+`;
 
 export const MainPage = (): ReactElement => {
     return (
-        <div style={{ height: "10000px" }}>
+        <StyledMainPage>
             <Header />
-            <Banner image={BannerImage} />
-        </div>
+            <MainPageBanner />
+            <MainPageSlider />
+        </StyledMainPage>
     );
 };

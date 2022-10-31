@@ -5,9 +5,9 @@ import { Logo } from "../../atoms/Logo";
 import { Toolkit } from "../../molecules/Toolkit";
 import { MenuButton } from "../../molecules/MenuButton";
 import { Typography } from "../../atoms/Typography";
-import { IconButton } from "../../atoms/IconButton";
-import { LikeIcon } from "../../atoms/LikeIcon";
 import { Button } from "../../atoms/Button";
+import { LikeIconButton } from "../../atoms/LikeIconButton";
+import { Link, useLocation } from "react-router-dom";
 
 interface IHeaderProps {
     children?: ReactElement | ReactNode;
@@ -18,12 +18,20 @@ const StyledHeader = styled.div<IHeaderProps>`
     height: 80px;
     top: 0;
     right: 0;
-    padding: 0px 37px 0px 80px;
+    z-index: 2;
+    padding: 0px;
     position: absolute;
     width: 100%;
+
+    & a {
+        color: inherit;
+        text-decoration: inherit;
+        cursor: inherit;
+    }
 `;
 
 export const Header: FC<IHeaderProps> = ({ children, ...props }) => {
+    const location = useLocation();
     return (
         <StyledHeader {...props}>
             <Grid
@@ -33,36 +41,48 @@ export const Header: FC<IHeaderProps> = ({ children, ...props }) => {
                 alignItems="center"
                 height="100%"
             >
-                <Grid item>
+                <Grid item padding="0px 0px 0px 80px">
                     <Logo />
                 </Grid>
 
                 <Grid item>
                     <Toolkit>
+                        <Link to="/">
+                            <MenuButton active={location.pathname === "/"}>
+                                <Typography color="white">HOME</Typography>
+                            </MenuButton>
+                        </Link>
                         <MenuButton>
-                            <Typography color="white">TEST</Typography>
+                            <Typography color="white">TOURES</Typography>
                         </MenuButton>
                         <MenuButton>
-                            <Typography color="white">TEST</Typography>
+                            <Typography color="white">ABOUT</Typography>
                         </MenuButton>
                         <MenuButton>
-                            <Typography color="white">TEST</Typography>
-                        </MenuButton>
-                        <MenuButton>
-                            <Typography color="white">TEST</Typography>
+                            <Typography color="white">HELP</Typography>
                         </MenuButton>
                     </Toolkit>
                 </Grid>
-                <Grid item justifySelf="end">
-                    <Grid container columns="auto auto" columnSpacing={12}>
+                <Grid item justifySelf="end" padding="0px 37px 0px 0px">
+                    <Grid container columns="auto auto" columnSpacing={"12px"}>
                         <Grid item>
-                            <IconButton>
-                                <LikeIcon />
-                            </IconButton>
+                            <Link to="/favorites">
+                                <LikeIconButton
+                                    active={location.pathname === "/favorites"}
+                                    onClick={() => null}
+                                />
+                            </Link>
                         </Grid>
                         <Grid item>
                             <Button>
-                                <Typography>SIGN IN</Typography>
+                                <Typography
+                                    fontFamily="Syne"
+                                    fontWeight="900"
+                                    fontSize="24px"
+                                    textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                                >
+                                    SIGN IN
+                                </Typography>
                             </Button>
                         </Grid>
                     </Grid>
